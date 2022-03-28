@@ -27,7 +27,7 @@ class Horde_Stream_Filter_Htmlspecialchars extends php_user_filter
     /**
      * @see stream_filter_register()
      */
-    public function filter($in, $out, &$consumed, $closing)
+    public function filter($in, $out, &$consumed, $closing): int
     {
         while ($bucket = stream_bucket_make_writeable($in)) {
             $bucket->data = htmlspecialchars($bucket->data);

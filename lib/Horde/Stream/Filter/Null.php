@@ -41,7 +41,7 @@ class Horde_Stream_Filter_Null extends php_user_filter
     /**
      * @see stream_filter_register()
      */
-    public function onCreate()
+    public function onCreate(): bool
     {
         $this->_replace = isset($this->params->replace)
             ? $this->params->replace
@@ -53,7 +53,7 @@ class Horde_Stream_Filter_Null extends php_user_filter
     /**
      * @see stream_filter_register()
      */
-    public function filter($in, $out, &$consumed, $closing)
+    public function filter($in, $out, &$consumed, $closing): int
     {
         while ($bucket = stream_bucket_make_writeable($in)) {
             $bucket->data = str_replace($this->_search, $this->_replace, $bucket->data);

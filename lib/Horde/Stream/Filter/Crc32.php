@@ -28,7 +28,7 @@ class Horde_Stream_Filter_Crc32 extends php_user_filter
     /**
      * @see stream_filter_register()
      */
-    public function onCreate()
+    public function onCreate(): bool
     {
         $this->params->crc32 = 0;
 
@@ -38,7 +38,7 @@ class Horde_Stream_Filter_Crc32 extends php_user_filter
     /**
      * @see stream_filter_register()
      */
-    public function filter($in, $out, &$consumed, $closing)
+    public function filter($in, $out, &$consumed, $closing): int
     {
         while ($bucket = stream_bucket_make_writeable($in)) {
             $consumed += $bucket->datalen;
